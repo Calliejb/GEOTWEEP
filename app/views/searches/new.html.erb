@@ -1,0 +1,9 @@
+<h1> Oh heyyy twitter </h1>
+
+<div>
+<%= form_tag searches_path, :method => 'get' do %>
+    <%= text_field_tag :term, params[:term] %>
+    <%= submit_tag "Search" %>
+<% end %>
+</div>
+
