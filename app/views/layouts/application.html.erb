@@ -13,31 +13,6 @@
 
   <body>
 
-    <nav class="top-bar" data-topbar>
-      <ul class="title-area">
-        <li class="name">
-          <h1><a href="#">GEOTWEEP</a></h1>
-        </li>
-      </ul>
-
-      <section class="top-bar-section">
-        <% if user_signed_in? %>
-        <ul class="left">
-          Logged in as <strong><%= current_user.email %></strong>
-        </ul>
-        <ul class="right">
-          <%= link_to "EDIT PROFILE", edit_user_registration_path %> 
-          <%= link_to "LOGOUT", destroy_user_session_path, method: :delete %>
-        </ul>
-        <% else %>
-        <ul class="right">
-          <%= link_to "SIGN UP", new_user_registration_path %> 
-          <%= link_to "LOGIN", new_user_session_path %>
-        </ul>
-        <% end %>
-      </section>
-    </nav>
-
     <% if notice %>
       <p><%= notice %></p>
     <% end %>
