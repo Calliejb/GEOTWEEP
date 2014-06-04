@@ -4,9 +4,9 @@ class SearchesController < ApplicationController
   def index
   	@searches = Search.all
 
-    def new
-      @search = Search.new
-    end
+    
+    @search = Search.new
+      
 
     twitter = Twitter::REST::Client.new do |config|
       config.consumer_key        = "ZVIgrKzFHV0s7MkUPsUaRxSB0"
@@ -18,13 +18,16 @@ class SearchesController < ApplicationController
     if params.has_key?(:term) && params[:term] != ""
       @tweets = twitter.search(params[:term], result_type: "recent").take(500)
     else
-      @tweets = twitter.search("geo", result_type: "recent").take(10)
+      @tweets = twitter.search("geo", result_type: "recent").take(100)
     end
 
-    
-    twitter.search(:term, result_type: "recent").take(5).each do |tweet|
-      @twt = tweet.text
+    if params.has_key?(:term2) && params[:term2] != ""
+      @tweets = twitter.search(params[:term2], result_type: "recent").take(500)
+    else
+      @tweets = twitter.search("geo", result_type: "recent").take(100)
     end
+
+  
 
   end
 

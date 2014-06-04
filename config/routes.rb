@@ -1,6 +1,7 @@
 TweetApp::Application.routes.draw do
 
   resources :searches
+  resources :multiple_searches
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

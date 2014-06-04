@@ -12,9 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require foundation
 //= require underscore
 //= require gmaps/google
-//= require foundation
+//= require angular
+//= require angular-resource
+
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
