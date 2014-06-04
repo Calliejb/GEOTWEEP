@@ -3,6 +3,11 @@ class SearchesController < ApplicationController
 	require 'twitter'
   def index
   	@searches = Search.all
+    respond_to do |format|
+      format.html
+      format.json {render json: @searches }
+    end
+
     
     @search = Search.new
       
