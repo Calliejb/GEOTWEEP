@@ -3,7 +3,6 @@ class SearchesController < ApplicationController
 	require 'twitter'
   def index
   	@searches = Search.all
-
     
     @search = Search.new
       
@@ -34,10 +33,15 @@ class SearchesController < ApplicationController
   def create
     @search = Search.new(params.require(:search).permit(:term))
     if @search.save
-      redirect_to searches_path
+      respond_to do |format|
+        format.html {redirect_to searches_path}
+        format.json {render json: @search, status: :created}
+      end
     else
-      render :new
-    end
+      respond_to do |format|
+        format.html {render 'new'}
+        format.json {render json: @search.errors, status: :unprocessable_entity}
+      end
   end
 
   def show
