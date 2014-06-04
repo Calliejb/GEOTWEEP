@@ -1,10 +1,9 @@
 <script src="//maps.google.com/maps/api/js?v=3.13&amp;sensor=false&amp;libraries=geometry" type="text/javascript"></script>
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
 
+
 <div x-ng-app="GeoTweepApp">
   <div x-ng-controller="GeoCtrl">
-
-    <h1> Yayyy twitter </h1>
 
     <div>
     <%= form_tag searches_path, :method => 'get' do %>
@@ -19,54 +18,113 @@
           <%= submit_tag "Search" %>
       <% end %>
     </div>
-
-
-    <% @tweets.each do |t| %>
-    	<% hasht = t.to_h %>
-    	<% if hasht[:coordinates] == nil %>
-    		.
-    	<% else %>
-    		<br>
-    		<% lat = hasht[:coordinates][:coordinates][0] %>
-        	<% lng = hasht[:coordinates][:coordinates][1] %>
-        	<%= lat %> <br>
-        	<%= lng %> <br>
-        <% end %>
-    <% end %>
-
-    <h2> <%= link_to "New Search", new_search_path %></h2>
-
-    <div>
-
-    <div id="map-canvas"></div>
-    </div>
   </div>
 </div>
 
-<script type="text/javascript">
-	handler = Gmaps.build('Google');
-  	handler.buildMap({ provider: {zoom: 1, provider_key: "AIzaSyDJJPOQH24cT6ETa9IZacS7NENpUt2MKzA"}, internal: {id: 'map-canvas'}}, function(){
-    markers = handler.addMarkers([
-      
-      <% @tweets.each do |t| %>
-      	<% hasht = t.to_h %>
-      	<% if hasht[:coordinates] != nil %>
+<div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+    <nav class="tab-bar">
+      <section class="left-small">
+        <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+      </section>
 
-      		<% latitude = hasht[:coordinates][:coordinates][1] %>
-      		<% longitude = hasht[:coordinates][:coordinates][0] %>
-  	      {
-	        "lat": <%= latitude.to_f %>,
-	        "lng": <%= longitude.to_f %>,
-	        infowindow: "<%= hasht[:text].to_s %> "// info window text (this is optional)
-	      },
-	    <% end %>
-      <% end %>
-    ]);
-    handler.map.centerOn(markers[0]); // centers on the first marker in the array
+      <section class="middle tab-bar-section">
+        <h1 class="title">Geotweep</h1>
+      </section>
+
+      <section class="right-small">
+        <a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+      </section>
+    </nav>
+
+    <aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        <li><label>Your Searches</label></li>
+        <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Earthquake</label></li>
+        <li><input id="checkbox2" type="checkbox"><label for="checkbox1">Tornado</label></li>
+        <li><input id="checkbox3" type="checkbox"><label for="checkbox1">Tsunami</label></li>
+        <li><input id="checkbox4" type="checkbox"><label for="checkbox1">Hurricane</label></li>
+        <li><input id="checkbox4" type="checkbox"><label for="checkbox1">Atom Bomb</label></li>
+        
+      </ul>
+    </aside>
+
+    <aside class="right-off-canvas-menu">
+      <ul class="off-canvas-list">
+        <li><label>Users</label></li>
+        <li><a href="#">Hari Seldon</a></li>
+        <li><a href="#">...</a></li>
+      </ul>
+    </aside>
+
+    <section class="main-section">
+      <!-- content goes here -->
+    
+
+<div id="map">
+  <div id="map-canvas" style></div>
+</div>
+
+
+<script type="text/javascript">
+handler = Gmaps.build('Google');
+handler.buildMap({ provider: {zoom: 3, provider_key: "AIzaSyDJJPOQH24cT6ETa9IZacS7NENpUt2MKzA"}, internal: {id: 'map-canvas'}}, function(){
+  markers = handler.addMarkers([
+
+    <% @tweets.each do |t| %>
+    <% hasht = t.to_h %>
+    <% if hasht[:coordinates] != nil %>
+
+    <% latitude = hasht[:coordinates][:coordinates][1] %>
+    <% longitude = hasht[:coordinates][:coordinates][0] %>
+    {
+      "lat": <%= latitude.to_f %>,
+      "lng": <%= longitude.to_f %>,
+          infowindow: "<%= hasht[:text].to_s %> "// info window text (this is optional)
+        },
+        <% end %>
+        <% end %>
+        ]);
+   
   });
 
 </script>
+<div class= "search">
+  <div class= "row">
+    <div class="medium-3 columns"><%= form_tag searches_path, :method => 'get' do %>
+      <%= text_field_tag :term, params[:term] %>
+      <%= submit_tag "Search" %>
+      <% end %>
+    </div>
+  </div>
 
+  <div class= "results">
+    <div class="medium-9 columns"><% @tweets.each do |t| %>
+     <% hasht = t.to_h %>
+     <% if hasht[:coordinates] == nil %>
+     .
+     <% else %>
+     <br>
+     <% lat = hasht[:coordinates][:coordinates][0] %>
+     <% lng = hasht[:coordinates][:coordinates][1] %>
+     <%= lat %> <br>
+     <%= lng %> <br>
+     <% end %>
+     <% end %>
+   </div></div>
+</div>
+
+   
+
+
+
+
+</section>
+
+  <a class="exit-off-canvas"></a>
+
+  </div>
+</div>
 
 
 

@@ -3,14 +3,14 @@ class SearchesController < ApplicationController
 	require 'twitter'
   def index
   	@searches = Search.all
-    respond_to do |format|
-      format.html
-      format.json {render json: @searches }
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.json {render json: @searches }
+    # end
 
-    
-    @search = Search.new
-      
+    def new
+      @search = Search.new
+    end
 
     twitter = Twitter::REST::Client.new do |config|
       config.consumer_key        = "ZVIgrKzFHV0s7MkUPsUaRxSB0"
@@ -25,11 +25,11 @@ class SearchesController < ApplicationController
       @tweets = twitter.search("geo", result_type: "recent").take(100)
     end
 
-    if params.has_key?(:term2) && params[:term2] != ""
-      @tweets = twitter.search(params[:term2], result_type: "recent").take(500)
-    else
-      @tweets = twitter.search("geo", result_type: "recent").take(100)
-    end
+    # if params.has_key?(:term2) && params[:term2] != ""
+    #   @tweets = twitter.search(params[:term2], result_type: "recent").take(500)
+    # else
+    #   @tweets = twitter.search("geo", result_type: "recent").take(100)
+    # end
 
   
 
@@ -47,8 +47,10 @@ class SearchesController < ApplicationController
         format.html {render 'new'}
         format.json {render json: @search.errors, status: :unprocessable_entity}
       end
+    end
   end
 
   def show
   end
+
 end

@@ -15,8 +15,11 @@
 //= require foundation
 //= require underscore
 //= require gmaps/google
+<<<<<<< HEAD
 //= require angular
 //= require angular-resource
+=======
+>>>>>>> 9091ef026b58d230fb52091ed1cf25010dc73dbf
 
 //= require_tree .
 
