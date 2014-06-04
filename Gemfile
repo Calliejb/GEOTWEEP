@@ -46,3 +46,13 @@ gem 'gmaps4rails'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+group :development, :test do
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'shoulda-matchers', require: false
+end
+
+gem 'devise'

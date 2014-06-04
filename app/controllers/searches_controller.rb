@@ -30,9 +30,10 @@ class SearchesController < ApplicationController
     # else
     #   @tweets = twitter.search("geo", result_type: "recent").take(100)
     # end
+  end
 
-  
-
+  def new
+    @search = Search.new
   end
 
   def create
