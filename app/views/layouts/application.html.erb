@@ -17,7 +17,7 @@
 
     <div class="off-canvas-wrap" data-offcanvas>
       <div class="inner-wrap page-wrapper">
-        <nav class="tab-bar">
+        <nav class="tab-bar top-bar" data-topbar>
           <section class="left-small">
             <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
           </section>
@@ -25,15 +25,27 @@
           <section class="middle tab-bar-section">
             <h1 class="title">Geotweep</h1>
           </section>
-
+          
           <section class="top-bar-section">
             <!-- Right Nav Section -->
             <ul class="right">
-                <%= link_to "SIGN UP", new_user_registration_path %> 
-                <%= link_to "LOGIN", new_user_session_path %>
-                <%= link_to "LOGOUT", destroy_user_session_path, method: :delete %>
+              <li class="has-dropdown">
+                <% if user_signed_in? %>
+                <a href="#"><%= current_user.email %></a>
+                <ul class="dropdown">
+                  <li><a href="#"><%= link_to "Edit Profile", edit_user_registration_path %></a></li>
+                  <li><a href="#"><%= link_to "Logout", destroy_user_session_path, method: :delete %></a></li>
+                </ul>
+                <% else %>
+                  <ul class="right">
+                    <li><a href="#"><%= link_to "Sign Up", new_user_registration_path %></a></li>
+                    <li><a href="#"><%= link_to "Login", new_user_session_path %></a></li>
+                  </ul>
+                  <% end %>
+              </li>
             </ul>
           </section>
+
         </nav>
 
         <aside class="left-off-canvas-menu">
