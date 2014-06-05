@@ -7,24 +7,20 @@
   <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
 </head>
 
-
-
-      <!-- content goes here -->
     
 
 
-<body>
-  
+<body x-ng-app="geotweepApp">
+  <div x-ng-controller="GeoCtrl">
+    
+    <!--     Renders our google map -->
+    <div id="map">
+      <div id="map-canvas"></div>
+    </div>
 
-  <div id="map">
-    <div id="map-canvas"></div>
-  </div>
-
-
-  
+    
     <div class= "row medium-block-grid-2"  >
       <div class="medium-8 columns search">
-
         <%= form_for(@search) do |f| %>
           <%= f.fields_for :terms do |builder| %>
             <%= builder.text_field :text %>
@@ -35,48 +31,48 @@
     </div>
 
 
-<script type="text/javascript">
-  handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {zoom: 3, styles: [
-    {"featureType": "all", "stylers": [{"saturation": -100},{"gamma": 0.5}]}], provider_key: "AIzaSyDJJPOQH24cT6ETa9IZacS7NENpUt2MKzA"}, internal: {id: 'map-canvas'}}, function(){
-    
-    markers1 = handler.addMarkers([
-      <% if @tweets %>
-        <% @tweets.each do |t| %>
-          <% hasht = t.to_h %>
-          <% if hasht[:coordinates] != nil %>
+    <script type="text/javascript">
+      handler = Gmaps.build('Google');
+      handler.buildMap({ provider: {zoom: 3, styles: [
+        {"featureType": "all", "stylers": [{"saturation": -100},{"gamma": 0.5}]}], provider_key: "AIzaSyDJJPOQH24cT6ETa9IZacS7NENpUt2MKzA"}, internal: {id: 'map-canvas'}}, function(){
+        
+        markers1 = handler.addMarkers([
+          <% if @tweets %>
+            <% @tweets.each do |t| %>
+              <% hasht = t.to_h %>
+              <% if hasht[:coordinates] != nil %>
 
-            <% latitude = hasht[:coordinates][:coordinates][1] %>
-            <% longitude = hasht[:coordinates][:coordinates][0] %>
-          { "lat": <%= latitude.to_f %>,
-            "lng": <%= longitude.to_f %>,
-                infowindow: "<%= hasht[:text].to_s %> "// info window text (this is optional)
-              },
+                <% latitude = hasht[:coordinates][:coordinates][1] %>
+                <% longitude = hasht[:coordinates][:coordinates][0] %>
+              { "lat": <%= latitude.to_f %>,
+                "lng": <%= longitude.to_f %>,
+                    infowindow: "<%= hasht[:text].to_s %> "// info window text (this is optional)
+                  },
+                <% end %>
+              <% end %>
+            <% end %>
+          ]);
+
+        markers2 = handler.addMarkers([
+          <% if @tweets2 %>
+            <% @tweets2.each do |t| %>
+                <% hasht = t.to_h %>
+                <% if hasht[:coordinates] != nil %>
+
+                <% latitude = hasht[:coordinates][:coordinates][1] %>
+                <% longitude = hasht[:coordinates][:coordinates][0] %>
+              { "lat": <%= latitude.to_f %>,
+                "lng": <%= longitude.to_f %>,
+                    infowindow: "<%= hasht[:text].to_s %> "// info window text (this is optional)
+                  },
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
-      ]);
+        ]);
+      });
+    </script>
 
-    markers2 = handler.addMarkers([
-      <% if @tweets2 %>
-        <% @tweets2.each do |t| %>
-            <% hasht = t.to_h %>
-            <% if hasht[:coordinates] != nil %>
-
-            <% latitude = hasht[:coordinates][:coordinates][1] %>
-            <% longitude = hasht[:coordinates][:coordinates][0] %>
-          { "lat": <%= latitude.to_f %>,
-            "lng": <%= longitude.to_f %>,
-                infowindow: "<%= hasht[:text].to_s %> "// info window text (this is optional)
-              },
-          <% end %>
-        <% end %>
-      <% end %>
-    ]);
-  });
-
-</script>
-
+  </div>
 </body>
 </html>
 
