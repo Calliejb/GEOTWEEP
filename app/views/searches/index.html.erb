@@ -5,21 +5,6 @@
 <div x-ng-app="GeoTweepApp">
   <div x-ng-controller="GeoCtrl">
 
-    <div>
-    <%= form_tag searches_path, :method => 'get' do %>
-        <%= text_field_tag :term, params[:term] %>
-        <%= submit_tag "Search" %>
-    <% end %>
-    </div>
-
-    <div>
-      <%= form_tag searches_path, :method => 'get' do %>
-          <%= text_field_tag :term2, params[:term2] %>
-          <%= submit_tag "Search" %>
-      <% end %>
-    </div>
-  </div>
-</div>
 
 <div class="off-canvas-wrap" data-offcanvas>
   <div class="inner-wrap">
@@ -69,54 +54,93 @@
 <script type="text/javascript">
 handler = Gmaps.build('Google');
 handler.buildMap({ provider: {zoom: 3, provider_key: "AIzaSyDJJPOQH24cT6ETa9IZacS7NENpUt2MKzA"}, internal: {id: 'map-canvas'}}, function(){
-  markers = handler.addMarkers([
+    markers1 = handler.addMarkers([
+      <% if @tweets %>
+        <% @tweets.each do |t| %>
+          <% hasht = t.to_h %>
+          <% if hasht[:coordinates] != nil %>
 
-    <% @tweets.each do |t| %>
-    <% hasht = t.to_h %>
-    <% if hasht[:coordinates] != nil %>
+            <% latitude = hasht[:coordinates][:coordinates][1] %>
+            <% longitude = hasht[:coordinates][:coordinates][0] %>
+          { "lat": <%= latitude.to_f %>,
+            "lng": <%= longitude.to_f %>,
+                infowindow: "<%= hasht[:text].to_s %> "// info window text (this is optional)
+              },
+            <% end %>
+          <% end %>
+        <% end %>
+      ]);
 
-    <% latitude = hasht[:coordinates][:coordinates][1] %>
-    <% longitude = hasht[:coordinates][:coordinates][0] %>
-    {
-      "lat": <%= latitude.to_f %>,
-      "lng": <%= longitude.to_f %>,
-          infowindow: "<%= hasht[:text].to_s %> "// info window text (this is optional)
-        },
+    markers2 = handler.addMarkers([
+      <% if @tweets2 %>
+        <% @tweets2.each do |t| %>
+            <% hasht = t.to_h %>
+            <% if hasht[:coordinates] != nil %>
+
+            <% latitude = hasht[:coordinates][:coordinates][1] %>
+            <% longitude = hasht[:coordinates][:coordinates][0] %>
+          { "lat": <%= latitude.to_f %>,
+            "lng": <%= longitude.to_f %>,
+                infowindow: "<%= hasht[:text].to_s %> "// info window text (this is optional)
+              },
+          <% end %>
         <% end %>
-        <% end %>
-        ]);
-   
+      <% end %>
+    ]);
   });
 
 </script>
 <div class= "search">
   <div class= "row">
-    <div class="medium-3 columns"><%= form_tag searches_path, :method => 'get' do %>
-      <%= text_field_tag :term, params[:term] %>
-      <%= submit_tag "Search" %>
+    <div class="medium-3 columns">
+
+      <%= form_for(@search) do |f| %>
+        <%= f.fields_for :terms do |builder| %>
+          <%= builder.text_field :text %>
+        <% end %>
+        <%= f.submit "SEARCH" %>
       <% end %>
+
     </div>
   </div>
 
   <div class= "results">
-    <div class="medium-9 columns"><% @tweets.each do |t| %>
-     <% hasht = t.to_h %>
-     <% if hasht[:coordinates] == nil %>
-     .
-     <% else %>
-     <br>
-     <% lat = hasht[:coordinates][:coordinates][0] %>
-     <% lng = hasht[:coordinates][:coordinates][1] %>
-     <%= lat %> <br>
-     <%= lng %> <br>
-     <% end %>
-     <% end %>
-   </div></div>
+    <div class="medium-9 columns">
+      <% if @tweets %>
+        <% @tweets.each do |t| %>
+         <% hasht = t.to_h %>
+         <% if hasht[:coordinates] == nil %>
+         .
+         <% else %>
+         <br>
+         <% lat = hasht[:coordinates][:coordinates][0] %>
+         <% lng = hasht[:coordinates][:coordinates][1] %>
+         <%= lat %> <br>
+         <%= lng %> <br>
+         <% end %>
+       <% end %>
+      <% end %>
+   </div>
 </div>
 
-   
-
-
+  <div class= "results">
+    <div class="medium-9 columns">
+    <% if @tweets2 %>
+      <% @tweets2.each do |t| %>
+       <% hasht = t.to_h %>
+         <% if hasht[:coordinates] == nil %>
+            |
+         <% else %>
+         <br>
+           <% lat = hasht[:coordinates][:coordinates][0] %>
+           <% lng = hasht[:coordinates][:coordinates][1] %>
+           <%= lat %> <br>
+           <%= lng %> <br>
+         <% end %>
+       <% end %>
+      <% end %>
+    </div>
+  </div>
 
 
 </section>
@@ -126,6 +150,8 @@ handler.buildMap({ provider: {zoom: 3, provider_key: "AIzaSyDJJPOQH24cT6ETa9IZac
   </div>
 </div>
 
+  </div>
+</div>
 
 
 
