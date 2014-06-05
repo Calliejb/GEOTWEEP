@@ -13,15 +13,41 @@
 
   <body>
 
-    <% if notice %>
-      <p><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p><%= alert %></p>
-    <% end %>
-
     <%= javascript_include_tag "application" %>
-    <%= yield %>
-    
+
+    <div class="off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap page-wrapper">
+        <nav class="tab-bar">
+          <section class="left-small">
+            <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+          </section>
+
+          <section class="middle tab-bar-section">
+            <h1 class="title">Geotweep</h1>
+          </section>
+        </nav>
+
+        <aside class="left-off-canvas-menu">
+          <ul class="off-canvas-list">
+            <li><label>Your Searches</label></li>
+            <br>
+            <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Earthquake</label></li>
+            <li><input id="checkbox2" type="checkbox"><label for="checkbox1">Tornado</label></li>
+            <li><input id="checkbox3" type="checkbox"><label for="checkbox1">Tsunami</label></li>
+            <li><input id="checkbox4" type="checkbox"><label for="checkbox1">Hurricane</label></li>
+            <li><input id="checkbox4" type="checkbox"><label for="checkbox1">Atom Bomb</label></li>  
+          </ul>
+        </aside>
+
+        <section class="main-section">
+          <!-- content goes here -->
+          <%= yield %>
+        </section>
+
+        <a class="exit-off-canvas"></a>
+
+      </div>
+    </div> 
+        
   </body>
 </html>

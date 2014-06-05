@@ -13,8 +13,6 @@ html, body {
   img{max-width: none;}
 }
 
-
-
 #map {
 	position: absolute;
 	width: auto; 
@@ -25,3 +23,9 @@ html, body {
 	bottom: 0;
 }
 
+.off-canvas-wrap {
+	height: 100%;
+}
+.page-wrapper {
+	height: 100%;
+}
