@@ -25,6 +25,15 @@
           <section class="middle tab-bar-section">
             <h1 class="title">Geotweep</h1>
           </section>
+
+          <section class="top-bar-section">
+            <!-- Right Nav Section -->
+            <ul class="right">
+                <%= link_to "SIGN UP", new_user_registration_path %> 
+                <%= link_to "LOGIN", new_user_session_path %>
+                <%= link_to "LOGOUT", destroy_user_session_path, method: :delete %>
+            </ul>
+          </section>
         </nav>
 
         <aside class="left-off-canvas-menu">
