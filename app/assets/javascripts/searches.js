@@ -24,7 +24,7 @@ geotweepApp.controller('GeoCtrl', ['$scope', 'Search', function($scope, Search) 
 
     Search.query(function(searches) {
       $scope.searches = searches;
-   });
+	});
 
     $scope.saveSearch = function () {
       $scope.newSearch.$save(function(search) {
@@ -43,5 +43,5 @@ geotweepApp.controller('GeoCtrl', ['$scope', 'Search', function($scope, Search) 
 
     $scope.clearErrors = function() {
       $scope.errors = null;
-    }
-}])
+    };
+}]);

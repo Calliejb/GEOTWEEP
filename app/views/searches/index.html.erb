@@ -10,24 +10,24 @@
     
 
 
-<body x-ng-app="geotweepApp">
-  <div x-ng-controller="GeoCtrl">
+<body>
     
     <!--     Renders our google map -->
     <div id="map">
       <div id="map-canvas"></div>
     </div>
 
-    
-    <div class= "row medium-block-grid-2"  >
-      <div class="medium-8 columns search">
-        <%= form_for(@search) do |f| %>
-          <%= f.fields_for :terms do |builder| %>
-            <%= builder.text_field :text %>
-          <% end %>
-          <%= f.submit "SEARCH" %>
-      <% end %>
-      </div>
+
+          <div class= "row medium-block-grid-2"  >
+            <div class="medium-8 columns search">
+              <%= form_for(@search) do |f| %>
+                <%= f.fields_for :terms do |builder| %>
+                  <%= builder.text_field :text %>
+                <% end %>
+                <%= f.submit "SEARCH" %>
+            <% end %>
+            </div>
+
     </div>
 
 
@@ -72,7 +72,7 @@
       });
     </script>
 
-  </div>
+
 </body>
 </html>
 
