@@ -57,3 +57,6 @@ group :test do
 end
 
 gem 'devise'
+
+
+gem "figaro"
