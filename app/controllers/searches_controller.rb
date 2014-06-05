@@ -68,14 +68,14 @@ private
   end
 
   def get_tweets(search)
-    if search.term
-      @tweets = @twitter.search(search.term, result_type: "recent").take(100)
+    if search.terms
+      @tweets = @twitter.search(search.terms[0].text, result_type: "recent").take(100)
     else
       @tweets = @twitter.search("geo", result_type: "recent").take(100)
     end
 
-    if search.term2
-      @tweets2 = @twitter.search(search.term2, result_type: "recent").take(100)
+    if search.terms[1]
+      @tweets2 = @twitter.search(search.terms[1].text, result_type: "recent").take(100)
     else
       @tweets2 = @twitter.search("geo", result_type: "recent").take(100)
     end

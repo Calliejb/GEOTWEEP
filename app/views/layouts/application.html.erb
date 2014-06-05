@@ -13,40 +13,62 @@
 
   <body>
 
-    <nav class="top-bar" data-topbar>
-      <ul class="title-area">
-        <li class="name">
-          <h1><a href="#">GEOTWEEP</a></h1>
-        </li>
-      </ul>
-
-      <section class="top-bar-section">
-        <% if user_signed_in? %>
-        <ul class="left">
-          Logged in as <strong><%= current_user.email %></strong>
-        </ul>
-        <ul class="right">
-          <%= link_to "EDIT PROFILE", edit_user_registration_path %> 
-          <%= link_to "LOGOUT", destroy_user_session_path, method: :delete %>
-        </ul>
-        <% else %>
-        <ul class="right">
-          <%= link_to "SIGN UP", new_user_registration_path %> 
-          <%= link_to "LOGIN", new_user_session_path %>
-        </ul>
-        <% end %>
-      </section>
-    </nav>
-
-    <% if notice %>
-      <p><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p><%= alert %></p>
-    <% end %>
-
     <%= javascript_include_tag "application" %>
-    <%= yield %>
-    
+
+    <div class="off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap page-wrapper">
+        <nav class="tab-bar top-bar" data-topbar>
+          <section class="left-small">
+            <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+          </section>
+
+          <section class="middle tab-bar-section">
+            <h1 class="title">Geotweep</h1>
+          </section>
+          
+          <section class="top-bar-section">
+            <!-- Right Nav Section -->
+            <ul class="right">
+              <li class="has-dropdown">
+                <% if user_signed_in? %>
+                <a href="#"><%= current_user.email %></a>
+                <ul class="dropdown">
+                  <li><a href="#"><%= link_to "Edit Profile", edit_user_registration_path %></a></li>
+                  <li><a href="#"><%= link_to "Logout", destroy_user_session_path, method: :delete %></a></li>
+                </ul>
+                <% else %>
+                  <ul class="right">
+                    <li><a href="#"><%= link_to "Sign Up", new_user_registration_path %></a></li>
+                    <li><a href="#"><%= link_to "Login", new_user_session_path %></a></li>
+                  </ul>
+                  <% end %>
+              </li>
+            </ul>
+          </section>
+
+        </nav>
+
+        <aside class="left-off-canvas-menu">
+          <ul class="off-canvas-list">
+            <li><label>Your Searches</label></li>
+            <br>
+            <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Earthquake</label></li>
+            <li><input id="checkbox2" type="checkbox"><label for="checkbox1">Tornado</label></li>
+            <li><input id="checkbox3" type="checkbox"><label for="checkbox1">Tsunami</label></li>
+            <li><input id="checkbox4" type="checkbox"><label for="checkbox1">Hurricane</label></li>
+            <li><input id="checkbox4" type="checkbox"><label for="checkbox1">Atom Bomb</label></li>  
+          </ul>
+        </aside>
+
+        <section class="main-section">
+          <!-- content goes here -->
+          <%= yield %>
+        </section>
+
+        <a class="exit-off-canvas"></a>
+
+      </div>
+    </div> 
+        
   </body>
 </html>
