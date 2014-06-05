@@ -53,7 +53,12 @@
           <ul class="off-canvas-list">
             <li><label>Your Searches</label></li>
             <br>
-            <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Earthquake</label></li>
+            <li><input id="checkbox1" type="checkbox">
+            <label for="checkbox1">
+              <% Term.find(1) do |term| %>
+                <%= term.text %>
+              <% end %>
+            </label></li>
             <li><input id="checkbox2" type="checkbox"><label for="checkbox2">Tornado</label></li>
             <li><input id="checkbox3" type="checkbox"><label for="checkbox3">Tsunami</label></li>
             <li><input id="checkbox4" type="checkbox"><label for="checkbox4">Hurricane</label></li>
