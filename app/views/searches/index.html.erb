@@ -17,7 +17,7 @@
 
 
   
-    <div class= "row">
+    <div class= "row medium-block-grid-2"  >
       <div class="medium-8 columns search"><%= form_tag searches_path, :method => 'get' do %>
         <%= text_field_tag :term, params[:term] %>
         <%= submit_tag "Search" %>
