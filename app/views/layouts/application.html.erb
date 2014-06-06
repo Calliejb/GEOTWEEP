@@ -16,8 +16,9 @@
 
     <%= javascript_include_tag "application" %>
 
-    <div class="off-canvas-wrap" data-offcanvas>
+    <div class="off-canvas-wrap">
       <div class="inner-wrap page-wrapper">
+
         <nav class="tab-bar top-bar" data-topbar>
           <section class="left-small">
             <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
@@ -43,18 +44,17 @@
                     <li><a href="#"><%= link_to "Sign Up", new_user_registration_path %></a></li>
                     <li><a href="#"><%= link_to "Login", new_user_session_path %></a></li>
                   </ul>
-                  <% end %>
+                <% end %>
               </li>
             </ul>
           </section>
-
         </nav>
 
         <aside class="left-off-canvas-menu">
           <ul class="off-canvas-list">
             <li><label>Your Searches</label></li>
             <br>
-             <% Search.all.each do |s| %>
+            <% Search.all.each do |s| %>
 
                 <li><input id="checkbox1" type="checkbox"><label for="checkbox1"><%= s.created_at.to_formatted_s(:long)    %></label></li>
                       <% s.terms.all.each do |term| %>
@@ -63,11 +63,8 @@
                              <a href="#">  <%= term.text %></a>
                           </li>                        
                         <% end %>
-                          
                      <% end %>
-         
             <% end %>
- 
           </ul>
         </aside>
 

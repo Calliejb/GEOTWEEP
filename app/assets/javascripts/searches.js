@@ -44,4 +44,6 @@ geotweepApp.controller('GeoCtrl', ['$scope', 'Search', function($scope, Search) 
     $scope.clearErrors = function() {
       $scope.errors = null;
     };
+
 }]);
+
