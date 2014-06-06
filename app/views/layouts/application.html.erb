@@ -13,6 +13,7 @@
 
   <body>
 
+
     <%= javascript_include_tag "application" %>
 
     <div class="off-canvas-wrap">
@@ -24,7 +25,7 @@
           </section>
 
           <section class="middle tab-bar-section">
-            <h1 class="title">Geotweep</h1>
+            <h1 class="title"><a href="#"><%= link_to "Geotweep", root_path %></h1>
           </section>
           
           <section class="top-bar-section">
@@ -32,11 +33,12 @@
             <ul class="right">
               <li class="has-dropdown">
                 <% if user_signed_in? %>
-                  <a href="#"><%= current_user.email %></a>
-                  <ul class="dropdown">
-                    <li><a href="#"><%= link_to "Edit Profile", edit_user_registration_path %></a></li>
-                    <li><a href="#"><%= link_to "Logout", destroy_user_session_path, method: :delete %></a></li>
-                  </ul>
+                <a href="#"><%= current_user.email %></a>
+                <ul class="dropdown">
+                  <li><a href="#"><%= link_to "View Profile", user_path(current_user) %></a></li>
+                  <li><a href="#"><%= link_to "Edit Profile", edit_user_registration_path %></a></li>
+                  <li><a href="#"><%= link_to "Logout", destroy_user_session_path, method: :delete %></a></li>
+                </ul>
                 <% else %>
                   <ul class="right">
                     <li><a href="#"><%= link_to "Sign Up", new_user_registration_path %></a></li>
@@ -50,7 +52,19 @@
 
         <aside class="left-off-canvas-menu">
           <ul class="off-canvas-list">
-    
+            <li><label>Your Searches</label></li>
+            <br>
+            <% Search.all.each do |s| %>
+
+                <li><input id="checkbox1" type="checkbox"><label for="checkbox1"><%= s.created_at.to_formatted_s(:long)    %></label></li>
+                      <% s.terms.all.each do |term| %>
+                        <% if term.text != nil && term.text != "" %>
+                          <li>
+                             <a href="#">  <%= term.text %></a>
+                          </li>                        
+                        <% end %>
+                     <% end %>
+            <% end %>
           </ul>
         </aside>
 

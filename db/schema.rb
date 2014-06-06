@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140605003716) do
+
+ActiveRecord::Schema.define(version: 20140605214020) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "searches", force: true do |t|
-    t.string   "term"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "term2"
-    t.string   "term3"
+    t.integer  "user_id"
   end
 
   create_table "terms", force: true do |t|
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20140605003716) do
     t.integer  "search_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "terms", ["search_id"], name: "index_terms_on_search_id", using: :btree
@@ -46,9 +47,11 @@ ActiveRecord::Schema.define(version: 20140605003716) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "search_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["search_id"], name: "index_users_on_search_id", using: :btree
 
 end

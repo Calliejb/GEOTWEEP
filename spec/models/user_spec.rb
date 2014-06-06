@@ -15,7 +15,7 @@ describe User do
 		passwordless = FactoryGirl.build(:user, password: nil)
 		expect(passwordless).to be_invalid
 	end
-  
+
 end
 
 describe "Sign-In Page" do

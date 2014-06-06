@@ -23,12 +23,13 @@ class SearchesController < ApplicationController
   def create
 
     @search = Search.new(search_params)
+    @search.user = current_user
 
     if @search.save
       respond_to do |format|
         format.html {redirect_to searches_path(search_id: @search.id)}
         format.json do 
-          render json: { term1: @search.terms.first, term2: @search.terms.last }, status: :created
+          render json: { terms: @search.terms.map(&:text), tweets1: @tweets, tweets2: @tweets2 }, status: :created
         end
       end
     else
