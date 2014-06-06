@@ -35,9 +35,14 @@
 
                 <% latitude = hasht[:coordinates][:coordinates][1] %>
                 <% longitude = hasht[:coordinates][:coordinates][0] %>
-              { "lat": <%= latitude.to_f %>,
-                "lng": <%= longitude.to_f %>,
-                    infowindow: "<%= hasht[:text].to_s %> "// info window text (this is optional)
+                  { "lat": <%= latitude.to_f %>,
+                    "lng": <%= longitude.to_f %>,
+                    "picture": {
+                      "url": "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|FF0000|000000",
+                      "width":  40,
+                      "height": 40
+                    },
+                    "infowindow": "<%= hasht[:text].to_s %> "// info window text (this is optional)
                   },
                 <% end %>
               <% end %>
@@ -52,9 +57,14 @@
 
                 <% latitude = hasht[:coordinates][:coordinates][1] %>
                 <% longitude = hasht[:coordinates][:coordinates][0] %>
-              { "lat": <%= latitude.to_f %>,
-                "lng": <%= longitude.to_f %>,
-                    infowindow: "<%= hasht[:text].to_s %> "// info window text (this is optional)
+                  { "lat": <%= latitude.to_f %>,
+                    "lng": <%= longitude.to_f %>,
+                    "picture": {
+                      "url": "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|0000FF|000000",
+                      "width":  40,
+                      "height": 40
+                    },
+                    "infowindow": "<%= hasht[:text].to_s %> "// info window text (this is optional)
                   },
               <% end %>
             <% end %>
