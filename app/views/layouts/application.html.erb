@@ -56,11 +56,11 @@
             <br>
             <% Search.all.each do |s| %>
 
-                <li><input id="checkbox1" type="checkbox"><label for="checkbox1"><%= s.created_at.to_formatted_s(:long)    %></label></li>
+                <li><label><%= s.created_at.to_formatted_s(:long) %></label></li>
                       <% s.terms.all.each do |term| %>
                         <% if term.text != nil && term.text != "" %>
                           <li>
-                             <a href="#">  <%= term.text %></a>
+                              <h4 class="text-center"><small><%= term.text %></small></h4>
                           </li>                        
                         <% end %>
                      <% end %>
