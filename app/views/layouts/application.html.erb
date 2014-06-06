@@ -54,11 +54,20 @@
           <ul class="off-canvas-list">
             <li><label>Your Searches</label></li>
             <br>
-            <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Earthquake</label></li>
-            <li><input id="checkbox2" type="checkbox"><label for="checkbox2">Tornado</label></li>
-            <li><input id="checkbox3" type="checkbox"><label for="checkbox3">Tsunami</label></li>
-            <li><input id="checkbox4" type="checkbox"><label for="checkbox4">Hurricane</label></li>
-            <li><input id="checkbox5" type="checkbox"><label for="checkbox5">Atom Bomb</label></li>  
+             <% Search.all.each do |s| %>
+
+                <li><input id="checkbox1" type="checkbox"><label for="checkbox1"><%= s.created_at.to_formatted_s(:long)    %></label></li>
+                      <% s.terms.all.each do |term| %>
+                        <% if term.text != nil && term.text != "" %>
+                          <li>
+                             <a href="#">  <%= term.text %></a>
+                          </li>                        
+                        <% end %>
+                          
+                     <% end %>
+         
+            <% end %>
+ 
           </ul>
         </aside>
 
