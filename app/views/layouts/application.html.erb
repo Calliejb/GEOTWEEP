@@ -58,7 +58,7 @@
                 <li><label><%= s.created_at.to_formatted_s(:long) %></label></li>
                       <% s.terms.all.each do |term| %>
                         <% if term.text != nil && term.text != "" %>
-                          <li>
+                          <li class="search-colored">
                               <h4 class="text-center"><small><%= term.text %></small></h4>
                           </li>                        
                         <% end %>

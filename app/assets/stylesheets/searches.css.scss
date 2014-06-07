@@ -34,3 +34,15 @@ html, body {
 	margin-left: 30%;
 	margin-top: 10%; 
 }
+
+.search-colored:nth-child(3n-2) {
+	h4 {
+		background: red;
+	}
+}
+.search-colored:nth-child(3n-1) {
+	h4 {
+		background: blue;
+	}
+}
+
