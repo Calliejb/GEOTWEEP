@@ -37,12 +37,73 @@ html, body {
 
 .search-colored:nth-child(3n-2) {
 	h4 {
-		background: red;
+		background: #BA3223;
 	}
 }
 .search-colored:nth-child(3n-1) {
 	h4 {
-		background: blue;
+		background: #2358BA;
 	}
 }
 
+/* DEVISE VIEWS */
+
+.container {
+	margin-top: 30px;
+	text-align: center;
+	font-family: helvetica;
+	color: black;
+}
+
+.title {
+	font-family: helvetica;
+	font-weight: bold;
+	color: black;
+}
+
+#user_email {
+	width: 35%;
+	margin: 0 auto;
+}
+
+#user_password {
+	width: 35%;
+	margin: 0 auto;
+}
+
+#user_password_confirmation {
+	width: 35%;
+	margin: 0 auto;
+}
+
+#user_current_password {
+	width: 35%;
+	margin: 0 auto;
+}
+
+.form-label {
+	font-size: 18px;
+}
+
+.bttn {
+	background: white;
+	font-family: helvetica;
+	line-height: 1;
+	font-size: 13px;
+	border: 1px solid black;
+	color: black;
+	font-weight: bold;
+	padding-top: 5px;
+	padding-right: 10px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+}
+
+.bttn:hover {
+	background: red;
+	transition: .5s ease-out;
+}
+
+.link {
+	color: black;
+}
