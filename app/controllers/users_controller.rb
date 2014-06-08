@@ -3,7 +3,6 @@ class UsersController < ApplicationController
 	def show
 	  @user = User.find(params[:id])
 	  @term_count = count_terms
-	  @searches = Search.all
 	end
 
 

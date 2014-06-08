@@ -12,4 +12,6 @@ describe Term do
 	end
 
 	it { should belong_to(:search) }
+	it { should have_db_column(:text) }
+	it { should have_db_column(:search_id) }
 end
