@@ -1,19 +1,16 @@
-<%= @user.email %>
-
-<h3>You have <%= @user.searches.count %> 
-	<% if @user.searches.count == 1 %>
-		search!
-	<% else %>
-		searches!
-	<% end %></h3>
-
-<% @user.searches.each do |search| %>
-	Created on <%= search.created_at %>. <br>
-	Search Terms <br>
-	<% @terms = Term.where(:search_id => search.id) %>
-	<% @terms.each do |term| %>
-		<%= term.text %> <br>
-	<% end %>
-<% end %>
 
 
+<div class="row">
+	<div class="large-2 medium-2 small-2 columns text-left">
+		<% @user.searches.each do |search| %>
+			<%= search.created_at.to_formatted_s(:long) %> 
+	</div>
+	<div class="large-8 medium-8 small-8 columns text-left "> 
+		<% @terms = Term.where(:search_id => search.id) %>
+			<% @terms.each do |term| %>
+				<%= term.text %>
+			<% end %>
+		<% end %>
+		<br />
+	</div>
+</div>
