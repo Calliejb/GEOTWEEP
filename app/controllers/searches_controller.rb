@@ -6,14 +6,30 @@ class SearchesController < ApplicationController
   respond_to :json, :html
 
   def index
-    # @searches = Search.all
-    # respond_with @searches
+
     @search = Search.new
     2.times { @search.terms.build }
 
     if params[:search_id]
       @s = Search.find(params[:search_id])
       get_tweets(@s)
+    end
+
+    # @topsearches = top_searches
+    # respond_to do |format|
+    #   format.html
+    #   format.json do
+    #     render json: @topsearches
+    #   end
+    # end
+
+
+    @searches = Search.all
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @searches
+      end
     end
   end
 
@@ -120,6 +136,16 @@ private
     else
       @tweets2 = @twitter.search("geo", result_type: "recent").take(100)
     end
+
   end
+
+  # def top_searches
+  #   searches = Search.all
+  #   searches_array = searches.map { |s| s.terms.text }
+  #   @num_search = Hash.new(0)
+  #   searches_array.each { |v| @num_search[v] += 1 }
+  #   @num_search
+  # end
+
 
 end

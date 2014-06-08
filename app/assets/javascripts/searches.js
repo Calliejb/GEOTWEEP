@@ -1,6 +1,6 @@
 
 
-var geotweepApp = angular.module('GeoTweepApp', ['ngResource']).config(
+var geoApp = angular.module('GeoApp', ['ngResource']).config(
 	['$httpProvider', function($httpProvider) {
 	var authToken = angular.element("meta[name=\"csrf-token\"]").attr("content");
 	var defaults = $httpProvider.defaults.headers;
@@ -11,13 +11,13 @@ var geotweepApp = angular.module('GeoTweepApp', ['ngResource']).config(
 	defaults.common['Accept'] = 'application/json';
 }]);
 
-geotweepApp.factory('Search', ['$resource', function($resource) {
+geoApp.factory('Search', ['$resource', function($resource) {
   return $resource('/searches/:id',
      {id: '@id'},
      {update: { method: 'PATCH'}});
 }]);
 
-geotweepApp.controller('GeoCtrl', ['$scope', 'Search', function($scope, Search) {
+geoApp.controller('GeoCtrl', ['$scope', 'Search', function($scope, Search) {
     $scope.searches= [];
 
     $scope.newSearch = new Search();

@@ -1,3 +1,4 @@
 class SearchSerializer < ActiveModel::Serializer
-  attributes :id, :term, :term2, :term3
+  attributes :id
+  has_many :terms
 end

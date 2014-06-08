@@ -1,19 +1,44 @@
-<%= @user.email %>
+<div x-ng-app="geotweepApp">
+	<div x-ng-controller="SearchesCtrl">
 
-<h3>You have <%= @user.searches.count %> 
-	<% if @user.searches.count == 1 %>
-		search!
-	<% else %>
-		searches!
-	<% end %></h3>
+		<%= @user.email %>
 
-<% @user.searches.each do |search| %>
-	Created on <%= search.created_at %>. <br>
-	Search Terms <br>
-	<% @terms = Term.where(:search_id => search.id) %>
-	<% @terms.each do |term| %>
-		<%= term.text %> <br>
-	<% end %>
-<% end %>
+		<h2>Top Searches</h2>
+
+		<% @term_count.first(10).each do |term| %>
+			<%= term[0] %>
+			<%= term[1] %> <br>
+		<% end %> <br>
+
+
+		<h2>Recent Searches</h2>
+
+		<div x-ng-repeat = "search in searches|limitTo:10">
+			<div x-ng-repeat = "term in search.terms">
+					{{term.text}}
+			</div>
+		</div>
+
+
+
+		<h3>You have <%= @user.searches.count %> 
+			<% if @user.searches.count == 1 %>
+				search!
+			<% else %>
+				searches!
+			<% end %></h3>
+
+		<% @user.searches.each do |search| %>
+			Created on <%= search.created_at %>. <br>
+			Search Terms <br>
+			<% @terms = Term.where(:search_id => search.id) %>
+			<% @terms.each do |term| %>
+				<%= term.text %> <br>
+			<% end %>
+		<% end %>
+
+
+	</div>
+</div>
 
 
