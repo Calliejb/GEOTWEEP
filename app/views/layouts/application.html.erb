@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Geotweep" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -55,7 +55,6 @@
             <li><label>Your Searches</label></li>
             <br>
             <% Search.all.each do |s| %>
-
                 <li><label><%= s.created_at.to_formatted_s(:long) %></label></li>
                       <% s.terms.all.each do |term| %>
                         <% if term.text != nil && term.text != "" %>
@@ -63,7 +62,7 @@
                               <h4 class="text-center"><small><%= term.text %></small></h4>
                           </li>                        
                         <% end %>
-                     <% end %>
+                      <% end %>
             <% end %>
           </ul>
         </aside>

@@ -1,6 +1,7 @@
 class SearchesController < ApplicationController
   require 'rubygems'
 	require 'twitter'
+  require 'tweetstream'
   before_action :twitter_init
   respond_to :json, :html
 
@@ -57,18 +58,24 @@ private
 
   def twitter_init
     @twitter = Twitter::REST::Client.new do |config|
-      config.consumer_key        = "ZVIgrKzFHV0s7MkUPsUaRxSB0"
-      config.consumer_secret     = "8ZvyhbwenIBiiDZX2V5jbfCyClvliVX08nBmKCJWs8JthZDapL"
-      config.access_token        = "30171655-TFN84aT0l0qqI5BgxCCko9Ueg2iHNCOlFPQhmBiw2"
-      config.access_token_secret = "nGsiCp8tgYZ90CbDSfDjgB4ytCnF9GqXbb40XLetkGPpi"
+      config.consumer_key        = "I5uwhFWWwNBi9cbKNcEbiNiQ3"
+      config.consumer_secret     = "2YWBImvONXhlUeMwws0UpOQb15yv86fiWAXL38LgQ1IAIctZv8"
+      config.access_token        = "30171655-Qu9egZ9y5Uix7dOmFmx9JExQ7qieDMn4qWef7uN5i"
+      config.access_token_secret = "nRBRKXUOdNoukFuay2QyuqLhZvXlSneDsG43ojNzwy67F"
     end
-    # TweetStream.configure do |config|
-    #   config.consumer_key  = "ZVIgrKzFHV0s7MkUPsUaRxSB0"
-    #   config.consumer_secret = "8ZvyhbwenIBiiDZX2V5jbfCyClvliVX08nBmKCJWs8JthZDapL"
-    #   config.oauth_token = "30171655-TFN84aT0l0qqI5BgxCCko9Ueg2iHNCOlFPQhmBiw2"
-    #   config.oauth_token_secret = "nGsiCp8tgYZ90CbDSfDjgB4ytCnF9GqXbb40XLetkGPpi"
-    #   config.auth_method = :oauth
-    # end
+
+  #   TweetStream.configure do |config|
+  #     config.consumer_key  = "ZVIgrKzFHV0s7MkUPsUaRxSB0"
+  #     config.consumer_secret = "8ZvyhbwenIBiiDZX2V5jbfCyClvliVX08nBmKCJWs8JthZDapL"
+  #     config.oauth_token = "30171655-TFN84aT0l0qqI5BgxCCko9Ueg2iHNCOlFPQhmBiw2"
+  #     config.oauth_token_secret = "nGsiCp8tgYZ90CbDSfDjgB4ytCnF9GqXbb40XLetkGPpi"
+  #     config.auth_method = :oauth
+  #   end
+  #   @twitterstream = TweetStream::Client.new
+
+  #   @twitterstream.on_error do |message|
+  #       puts message
+  #   end
   end
 
   def search_params
@@ -78,23 +85,41 @@ private
   def get_tweets(search)
     
     # if search.terms
-    #   @twitterstream = TweetStream::Client.new.track(search.terms[0].text, search.terms[1].text)
+    #   @streams = @twitterstream.track(search.terms[0].text)
     # else
-    #   @twitterstream = TweetStream::Client.new.track("geo")
+    #   @streams = @twitterstream.track("geo")
+    # end
+
+    # if search.terms[1]
+    #   @streams2 = @twitterstream.track(search.terms[1].text)
+    # else
+    #   @streams2 = @twitterstream.track("geo")
+    # end
+
+    # if count >= tweetCount
+    #     client.stop
     # end
 
     if search.terms
+      geoloc = "34,-118,100mi"
       @tweets = @twitter.search(search.terms[0].text, result_type: "recent").take(100)
     else
       @tweets = @twitter.search("geo", result_type: "recent").take(100)
     end
 
+    # if search.terms
+    #   geoloc = "34,-118,10000mi"
+    #   @tweetsagain = @twitter.search(search.terms[0].text, location: geoloc, result_type: "recent").take(500)
+    # else
+    #   @tweetsagain = @twitter.search("geo", result_type: "recent").take(100)
+    # end
+
     if search.terms[1]
+      geoloc = "34,-118,100mi"
       @tweets2 = @twitter.search(search.terms[1].text, result_type: "recent").take(100)
     else
       @tweets2 = @twitter.search("geo", result_type: "recent").take(100)
     end
   end
-
 
 end
