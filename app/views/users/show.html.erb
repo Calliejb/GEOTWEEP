@@ -1,16 +1,17 @@
-
-
+<br />
 <div class="row">
-	<div class="large-2 medium-2 small-2 columns text-left">
-		<% @user.searches.each do |search| %>
-			<%= search.created_at.to_formatted_s(:long) %> 
-	</div>
-	<div class="large-8 medium-8 small-8 columns text-left "> 
-		<% @terms = Term.where(:search_id => search.id) %>
-			<% @terms.each do |term| %>
+	<% @user.searches.each do |search| %>
+		<div class="medium-3 columns" id="view-terms">
+			<a href="#"><img src="http://imgur.com/eOjV6Lm.png" /></a>
+			<%= search.created_at.to_formatted_s(:long) %>
+		</div>
+	<% @terms = Term.where(:search_id => search.id) %>
+		<% @terms.each do |term| %>
+			<div class="medium-9 columns" id="view-terms">
 				<%= term.text %>
-			<% end %>
+			</div>
 		<% end %>
 		<br />
-	</div>
+	<% end %>
 </div>
+
