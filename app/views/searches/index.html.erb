@@ -31,7 +31,7 @@
       handler.buildMap({ provider: {zoom: 2.5, styles: [
         {"featureType": "all", "stylers": [{"saturation": -100},{"gamma": 0.5}]}], provider_key: "AIzaSyDJJPOQH24cT6ETa9IZacS7NENpUt2MKzA"}, internal: {id: 'map-canvas'}}, function(){
         
-        markers0 = handler.addMarkers([
+        markers1 = handler.addMarkers([
           <% if @tweets %>
             <% @tweets.each do |t| %>
               <% hasht = t.to_h %>
@@ -68,8 +68,7 @@
                       "width":  40,
                       "height": 40
                     },
-                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> ",
-                    "do_clustering": false
+                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> "// info window text (this is optional)
                   },
               <% end %>
             <% end %>
@@ -77,8 +76,8 @@
         ]);
 
         markers3 = handler.addMarkers([
-          <% if @tweets2 %>
-            <% @tweets2.each do |t| %>
+          <% if @tweets3 %>
+            <% @tweets3.each do |t| %>
                 <% hasht = t.to_h %>
                 <% if hasht[:coordinates] != nil %>
 
@@ -91,15 +90,15 @@
                       "width":  40,
                       "height": 40
                     },
-                    "infowindow": "<%= hasht[:text].to_s %> "// info window text (this is optional)
+                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> "// info window text
                   },
               <% end %>
             <% end %>
           <% end %>
         ]);
         markers4 = handler.addMarkers([
-          <% if @tweets2 %>
-            <% @tweets2.each do |t| %>
+          <% if @tweets4 %>
+            <% @tweets4.each do |t| %>
                 <% hasht = t.to_h %>
                 <% if hasht[:coordinates] != nil %>
 
@@ -112,15 +111,15 @@
                       "width":  40,
                       "height": 40
                     },
-                    "infowindow": "<%= hasht[:text].to_s %> "// info window text (this is optional)
+                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> "// info window text (this is optional)
                   },
               <% end %>
             <% end %>
           <% end %>
         ]);
         markers5 = handler.addMarkers([
-          <% if @tweets2 %>
-            <% @tweets2.each do |t| %>
+          <% if @tweets5 %>
+            <% @tweets5.each do |t| %>
                 <% hasht = t.to_h %>
                 <% if hasht[:coordinates] != nil %>
 
@@ -133,7 +132,7 @@
                       "width":  40,
                       "height": 40
                     },
-                    "infowindow": "<%= hasht[:text].to_s %> "// info window text (this is optional)
+                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> "// info window text (this is optional)
                   },
               <% end %>
             <% end %>
