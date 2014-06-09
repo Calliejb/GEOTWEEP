@@ -67,18 +67,33 @@ html, body {
 
 /* USER PROFILE VIEW */
 
-/*.row {
-	margin: 0 auto;
-	padding: 5px;
-}*/
+.logo {
+	position: absolute;
+	left: 38%;
+	top: 100px;
+	padding: 30px;
+	z-index: 10;
+	background-color: black;
+	color: white;
+	border-radius: 10px;
+	
+}
+
+.profile-background {
+	background-color: #1780C2;
+}
+
+.search-history {
+	padding: 10px 40px 10px 20px;
+}
 
 .recent-searches {
 	padding-left: 5%;
-	padding-top: 100px;
+	margin-top: 220px;
 }
 .top-searches {
 	padding-left: 5%;
-	padding-top: 100px;
+	margin-top: 220px;
 }
 
 .background {
@@ -154,6 +169,8 @@ html, body {
 #button {
 text-align: center;
 }
+
+/* Home Page View */
 
 $padding: 1rem;
 $bg: #FA956A;

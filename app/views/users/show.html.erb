@@ -1,75 +1,74 @@
 <div x-ng-app="geotweepApp">
 	<div x-ng-controller="SearchesCtrl">
 
-		<div class = "background">
+		<h1 class = "logo">GEOTWEEP</h1>
 
-			<div class="large-6 columns">
-				<h2 class="title"><%= @user.email %></h2>
-				<h5>Joined on <%= @user.created_at.to_formatted_s(:long) %>.</h5>
-				<br>
-				<h2>Search History</h2>
-				<h5>You have <%= @user.searches.count %> 
-						<% if @user.searches.count == 1 %>
-							search!
-						<% else %>
-							searches!
-						<% end %></h5>
-						<br>
-					<% @user.searches.each do |search| %>
-					<dl class="accordion" data-accordion>
-					  <dd>
-					    <a href="#panel1"><h6><%= search.created_at.to_formatted_s(:long) %></h6></a>
-					    <% @terms = Term.where(:search_id => search.id) %>
-					    <div id="panel1" class="content">
-							<% @terms.each do |term| %>
-								<div class="view-terms">
-									<%= term.text %>
-								</div>
-							<% end %>
-					    </div>
-					  </dd>
-					</dl>
-				<% end %>
-			</div>
+		<div class="large-6 columns profile-background search-history">
+			<h2 class="title"><%= @user.email %></h2>
+			<h5>Joined on <%= @user.created_at.to_formatted_s(:long) %>.</h5>
+			<br>
+			<h2>Search History</h2>
+			<h5>You have <%= @user.searches.count %> 
+					<% if @user.searches.count == 1 %>
+						search!
+					<% else %>
+						searches!
+					<% end %></h5>
+					<br>
+				<% @user.searches.each do |search| %>
+				<dl class="accordion" data-accordion>
+				  <dd>
+				    <a href="#panel1"><h6><%= search.created_at.to_formatted_s(:long) %></h6></a>
+				    <% @terms = Term.where(:search_id => search.id) %>
+				    <div id="panel1" class="content">
+						<% @terms.each do |term| %>
+							<div class="view-terms">
+								<%= term.text %>
+							</div>
+						<% end %>
+				    </div>
+				  </dd>
+				</dl>
+			<% end %>
+		</div>
 
-			<div class="large-3 columns">
-				<div class = "recent-searches">
-					<h2>Recent Searches</h2>
-					<table>
-						<thead>
-							<tr>
-								<th width = "250">Search Terms</th>
+		<div class="large-3 columns">
+			<div class = "recent-searches">
+				<h2>Recent Searches</h2>
+				<table>
+					<thead>
+						<tr>
+							<th width = "250">Search Terms</th>
+						</tr>
+					</thead>
+					<tbody x-ng-repeat = "search in searches|limitTo:20">
+							<tr x-ng-repeat = "term in search.terms">
+								<td> {{term.text}}</td>
 							</tr>
-						</thead>
-						<tbody x-ng-repeat = "search in searches|limitTo:20">
-								<tr x-ng-repeat = "term in search.terms">
-									<td> {{term.text}}</td>
-								</tr>
-						</tbody>
-					</table>
-				</div>
+					</tbody>
+				</table>
 			</div>
+		</div>
 
-			<div class ="large-3 columns">
-				<div class = "top-searches">
-					<h2>Top Searches</h2>
-					<table>
-						<thead>
+		<div class ="large-3 columns">
+			<div class = "top-searches">
+				<h2>Top Searches</h2>
+				<table>
+					<thead>
+						<tr>
+							<th width = "200">Search Terms</th>
+							<th width = "50"># Times Searched</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @term_count.first(20).each do |term| %>
 							<tr>
-								<th width = "200">Search Terms</th>
-								<th width = "50"># Times Searched</th>
+								<td><%= term[0] %></td>
+								<td><%= term[1] %></td>
 							</tr>
-						</thead>
-						<tbody>
-							<% @term_count.first(20).each do |term| %>
-								<tr>
-									<td><%= term[0] %></td>
-									<td><%= term[1] %></td>
-								</tr>
-							<% end %>
-						</tbody>
-					</table>
-				</div>
+						<% end %>
+					</tbody>
+				</table>
 			</div>
 		</div>
 
