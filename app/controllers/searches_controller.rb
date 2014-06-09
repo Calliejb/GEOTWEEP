@@ -1,18 +1,27 @@
 class SearchesController < ApplicationController
   require 'rubygems'
 	require 'twitter'
+  require 'tweetstream'
   before_action :twitter_init
   respond_to :json, :html
 
   def index
-    # @searches = Search.all
-    # respond_with @searches
+
     @search = Search.new
-    2.times { @search.terms.build }
+    @search.terms.build
 
     if params[:search_id]
       @s = Search.find(params[:search_id])
       get_tweets(@s)
+    end
+
+
+    @searches = Search.all
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @searches
+      end
     end
   end
 
@@ -57,10 +66,10 @@ private
 
   def twitter_init
     @twitter = Twitter::REST::Client.new do |config|
-      config.consumer_key        = "ZVIgrKzFHV0s7MkUPsUaRxSB0"
-      config.consumer_secret     = "8ZvyhbwenIBiiDZX2V5jbfCyClvliVX08nBmKCJWs8JthZDapL"
-      config.access_token        = "30171655-TFN84aT0l0qqI5BgxCCko9Ueg2iHNCOlFPQhmBiw2"
-      config.access_token_secret = "nGsiCp8tgYZ90CbDSfDjgB4ytCnF9GqXbb40XLetkGPpi"
+      config.consumer_key        = "f0GidKtuTEDKhUo9KRv8oTHTn"
+      config.consumer_secret     = "Zpto8PZa2DtRJCRwtrrEwk9aluCOkyYN3QY6L2uivUuoPrDiUc"
+      config.access_token        = "74282467-2qwuw312kRAGSCuQwtxQx3UAwQswAvbmfjRHU3VAA"
+      config.access_token_secret = "dS9MlX9mhNd5AXEKztvTNyQpnUJMcHmdCAHMJ4zpeW9nZ"
     end
   end
 
@@ -69,17 +78,58 @@ private
   end
 
   def get_tweets(search)
-    if search.terms
-      @tweets = @twitter.search(search.terms[0].text, result_type: "recent").take(100)
+
+    if search.terms[0]
+      @tweets = @twitter.search(search.terms[0].text, :result_type => "recent").take(100)      
+      10.times do
+        last_id = @tweets.last.id - 1
+        @tweets = @tweets + @twitter.search(search.terms[0].text, max_id: last_id, result_type: "recent").take(100)
+      end
     else
       @tweets = @twitter.search("geo", result_type: "recent").take(100)
     end
 
     if search.terms[1]
-      @tweets2 = @twitter.search(search.terms[1].text, result_type: "recent").take(100)
+      @tweets2 = @twitter.search(search.terms[1].text, result_type: "recent").take(100)  
+      10.times do
+        last_id = @tweets2.last.id - 1
+        @tweets2 = @tweets2 + @twitter.search(search.terms[1].text, max_id: last_id, result_type: "recent").take(100)
+      end
     else
       @tweets2 = @twitter.search("geo", result_type: "recent").take(100)
     end
+
+    if search.terms[2]
+      @tweets3 = @twitter.search(search.terms[2].text, result_type: "recent").take(100)  
+      10.times do
+        last_id = @tweets3.last.id - 1
+        @tweets3 = @tweets3 + @twitter.search(search.terms[1].text, max_id: last_id, result_type: "recent").take(100)
+      end
+    else
+      @tweets3 = @twitter.search("geo", result_type: "recent").take(100)
+    end
+
+    if search.terms[3]
+      @tweets4 = @twitter.search(search.terms[2].text, result_type: "recent").take(100)  
+      10.times do
+        last_id = @tweets4.last.id - 1
+        @tweets4 = @tweets4 + @twitter.search(search.terms[1].text, max_id: last_id, result_type: "recent").take(100)
+      end
+    else
+      @tweets4 = @twitter.search("geo", result_type: "recent").take(100)
+    end
+
+    if search.terms[4]
+      @tweets4 = @twitter.search(search.terms[2].text, result_type: "recent").take(100)  
+      10.times do
+        last_id = @tweets4.last.id - 1
+        @tweets4 = @tweets4 + @twitter.search(search.terms[1].text, max_id: last_id, result_type: "recent").take(100)
+      end
+    else
+      @tweets4 = @twitter.search("geo", result_type: "recent").take(100)
+    end
+
   end
+
 
 end
