@@ -17,6 +17,5 @@
 //= require gmaps/google
 //= require angular
 //= require angular-resource
-//= require_tree .
 
 $(function(){ $(document).foundation(); });

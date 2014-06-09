@@ -6,8 +6,8 @@
 
     <title><%= content_for?(:title) ? yield(:title) : "Geotweep" %></title>
 
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= stylesheet_link_tag    "application", params[:controller] %>
+    <%= javascript_include_tag "vendor/modernizr", params[:controller] %>
     <%= csrf_meta_tags %>
   </head>
 
