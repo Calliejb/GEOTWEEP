@@ -57,13 +57,13 @@
               <% User.find(current_user).searches.each do |s| %>
 
                 <li><label><%= s.created_at.to_formatted_s(:long) %></label></li>
-                <% s.terms.all.each do |term| %>
+                <div><% s.terms.all.each do |term| %>
                   <% if term.text != nil && term.text != "" %>
                     <li class="search-colored">
                         <h4 class="text-center"><small><%= term.text %></small></h4>
                     </li>                        
                   <% end %>
-                <% end %>
+                <% end %></div>
               <% end %>
             <% else %>
               <li><label>Create an Account to save your searches and see past ones!<label><li>
