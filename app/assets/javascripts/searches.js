@@ -33,13 +33,6 @@ geoApp.controller('GeoCtrl', ['$scope', 'Search', function($scope, Search) {
       });
     };
 
-    $scope.showSearchField = function(search) {
-      // search.terms = true;
-    };
-
-    $scope.hideSearchField = function(search) {
-      // search.terms = false;
-    };
 
     $scope.clearErrors = function() {
       $scope.errors = null;
@@ -91,6 +84,7 @@ $(function(){
       lastsearchbox.last().remove();
   });
 });
+
 
 
 

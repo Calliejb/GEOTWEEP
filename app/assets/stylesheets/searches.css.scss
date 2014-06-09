@@ -1,3 +1,4 @@
+@import "foundation/components/buttons";
 
 html, body {
 	width: 100%;
@@ -107,3 +108,20 @@ html, body {
 .link {
 	color: black;
 }
+
+$padding: 1rem;
+$bg: #FA956A;
+$radius: true;
+
+.custom-button-class {
+  @include button($padding, $bg, $radius);
+}
+
+.new-search {
+	position: absolute;
+	left: 43%;
+	top: 5px;
+}
+
+
+

@@ -11,19 +11,24 @@
       <div id="map-canvas"></div>
     </div>
     
-    <div class= "row medium-block-grid-2"  >
+    <div x-ng-show = "showBoxes" class= "row medium-block-grid-2"  >
       <div class="medium-8 columns search">
         <%= form_for(@search) do |f| %>
           <%= f.fields_for :terms do |builder| %>
             <%= builder.text_field :text, placeholder: "add a search term", class: "searchbox" %>
           <% end %>
-          <%= f.submit "SEARCH", class: "button" %>
+          <%= f.submit "SEARCH", class: "button", ng_click: "showBoxes = false" %>
           <input type = "button" class = "button" id = "btnAddOne" value = "Add another term">
           <input type = "button" class = "button" id = "removeTerm" value = "Remove the last term">
       <% end %>
       </div>
     </div>
 
+    <div class = "new-search">
+      <div x-ng-hide = "showBoxes" class = "medium-6 columns">
+        <a x-ng-click= "showBoxes = true" class = "custom-button-class">New Search </a>
+      </div>
+    </div>
 
 
     <script type="text/javascript">
@@ -47,7 +52,8 @@
                       "height": 40
                     },
                     "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> ",
-                    "do_clustering": false
+                    "do_clustering": false,
+                    "clusterer_grid_size": 500
                   },
                 <% end %>
               <% end %>
@@ -69,7 +75,9 @@
                       "width":  40,
                       "height": 40
                     },
-                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> "// info window text (this is optional)
+                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> ",
+                    "do_clustering": false,
+                    "clusterer_grid_size": 500
                   },
               <% end %>
             <% end %>
@@ -91,7 +99,9 @@
                       "width":  40,
                       "height": 40
                     },
-                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> "// info window text
+                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> ",
+                    "do_clustering": false,
+                    "clusterer_grid_size": 500
                   },
               <% end %>
             <% end %>

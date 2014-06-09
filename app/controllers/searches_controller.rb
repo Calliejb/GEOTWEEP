@@ -81,32 +81,32 @@ private
 
     if search.terms[0]
       @tweets = @twitter.search(search.terms[0].text, :result_type => "recent").take(100)      
-      20.times do
+      10.times do
         last_id = @tweets.last.id - 1
         @tweets = @tweets + @twitter.search(search.terms[0].text, max_id: last_id, result_type: "recent").take(100)
       end
     else
-      @tweets = @twitter.search("geo", result_type: "recent").take(100)
+      @tweets = nil
     end
 
     if search.terms[1]
       @tweets2 = @twitter.search(search.terms[1].text, result_type: "recent").take(100)  
-      20.times do
+      10.times do
         last_id = @tweets2.last.id - 1
         @tweets2 = @tweets2 + @twitter.search(search.terms[1].text, max_id: last_id, result_type: "recent").take(100)
       end
     else
-      @tweets2 = @twitter.search("geo", result_type: "recent").take(100)
+      @tweets2 = nil
     end
 
     if search.terms[2]
       @tweets3 = @twitter.search(search.terms[2].text, result_type: "recent").take(100)  
-      20.times do
+      10.times do
         last_id = @tweets3.last.id - 1
         @tweets3 = @tweets3 + @twitter.search(search.terms[1].text, max_id: last_id, result_type: "recent").take(100)
       end
     else
-      @tweets3 = @twitter.search("geo", result_type: "recent").take(100)
+      @tweets3 = nil
     end
 
 
