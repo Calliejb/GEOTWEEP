@@ -11,7 +11,7 @@
 					<%= search.created_at.to_formatted_s(:long) %> 
 			</div>
 			<div class="large-8 medium-8 small-8 columns text-left "> 
-				<% @terms = Term.where(:search_id => search.id) %>
+				<% @terms = Term.where(:search_id => search.id) %>				
 					<% @terms.each do |term| %>
 						<%= term.text %>
 					<% end %>

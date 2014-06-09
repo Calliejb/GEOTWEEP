@@ -24,7 +24,7 @@
 
     <script type="text/javascript">
       handler = Gmaps.build('Google');
-      handler.buildMap({ provider: {zoom: 3, styles: [
+      handler.buildMap({ provider: {zoom: 2.5, styles: [
         {"featureType": "all", "stylers": [{"saturation": -100},{"gamma": 0.5}]}], provider_key: "AIzaSyDJJPOQH24cT6ETa9IZacS7NENpUt2MKzA"}, internal: {id: 'map-canvas'}}, function(){
         
         markers1 = handler.addMarkers([
@@ -42,7 +42,7 @@
                       "width":  40,
                       "height": 40
                     },
-                    "infowindow": "<%= hasht[:text].to_s %> "// info window text (this is optional)
+                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> "
                   },
                 <% end %>
               <% end %>
@@ -64,7 +64,8 @@
                       "width":  40,
                       "height": 40
                     },
-                    "infowindow": "<%= hasht[:text].to_s %> "// info window text (this is optional)
+                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> ",
+                    "do_clustering": false
                   },
               <% end %>
             <% end %>

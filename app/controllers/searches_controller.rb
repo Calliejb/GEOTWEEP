@@ -71,19 +71,6 @@ private
       config.access_token        = "30171655-Qu9egZ9y5Uix7dOmFmx9JExQ7qieDMn4qWef7uN5i"
       config.access_token_secret = "nRBRKXUOdNoukFuay2QyuqLhZvXlSneDsG43ojNzwy67F"
     end
-
-  #   TweetStream.configure do |config|
-  #     config.consumer_key  = "ZVIgrKzFHV0s7MkUPsUaRxSB0"
-  #     config.consumer_secret = "8ZvyhbwenIBiiDZX2V5jbfCyClvliVX08nBmKCJWs8JthZDapL"
-  #     config.oauth_token = "30171655-TFN84aT0l0qqI5BgxCCko9Ueg2iHNCOlFPQhmBiw2"
-  #     config.oauth_token_secret = "nGsiCp8tgYZ90CbDSfDjgB4ytCnF9GqXbb40XLetkGPpi"
-  #     config.auth_method = :oauth
-  #   end
-  #   @twitterstream = TweetStream::Client.new
-
-  #   @twitterstream.on_error do |message|
-  #       puts message
-  #   end
   end
 
   def search_params
@@ -91,42 +78,55 @@ private
   end
 
   def get_tweets(search)
-    
-    # if search.terms
-    #   @streams = @twitterstream.track(search.terms[0].text)
-    # else
-    #   @streams = @twitterstream.track("geo")
-    # end
 
-    # if search.terms[1]
-    #   @streams2 = @twitterstream.track(search.terms[1].text)
-    # else
-    #   @streams2 = @twitterstream.track("geo")
-    # end
-
-    # if count >= tweetCount
-    #     client.stop
-    # end
-
-    if search.terms
-      geoloc = "34,-118,100mi"
-      @tweets = @twitter.search(search.terms[0].text, result_type: "recent").take(100)
+    if search.terms[0]
+      @tweets = @twitter.search(search.terms[0].text, :result_type => "recent").take(100)      
+      10.times do
+        last_id = @tweets.last.id - 1
+        @tweets = @tweets + @twitter.search(search.terms[0].text, max_id: last_id, result_type: "recent").take(100)
+      end
     else
       @tweets = @twitter.search("geo", result_type: "recent").take(100)
     end
 
-    # if search.terms
-    #   geoloc = "34,-118,10000mi"
-    #   @tweetsagain = @twitter.search(search.terms[0].text, location: geoloc, result_type: "recent").take(500)
-    # else
-    #   @tweetsagain = @twitter.search("geo", result_type: "recent").take(100)
-    # end
-
     if search.terms[1]
-      geoloc = "34,-118,100mi"
-      @tweets2 = @twitter.search(search.terms[1].text, result_type: "recent").take(100)
+      @tweets2 = @twitter.search(search.terms[1].text, result_type: "recent").take(100)  
+      10.times do
+        last_id = @tweets2.last.id - 1
+        @tweets2 = @tweets2 + @twitter.search(search.terms[1].text, max_id: last_id, result_type: "recent").take(100)
+      end
     else
       @tweets2 = @twitter.search("geo", result_type: "recent").take(100)
+    end
+
+    if search.terms[2]
+      @tweets3 = @twitter.search(search.terms[2].text, result_type: "recent").take(100)  
+      10.times do
+        last_id = @tweets3.last.id - 1
+        @tweets3 = @tweets3 + @twitter.search(search.terms[1].text, max_id: last_id, result_type: "recent").take(100)
+      end
+    else
+      @tweets3 = @twitter.search("geo", result_type: "recent").take(100)
+    end
+
+    if search.terms[3]
+      @tweets4 = @twitter.search(search.terms[2].text, result_type: "recent").take(100)  
+      10.times do
+        last_id = @tweets4.last.id - 1
+        @tweets4 = @tweets4 + @twitter.search(search.terms[1].text, max_id: last_id, result_type: "recent").take(100)
+      end
+    else
+      @tweets4 = @twitter.search("geo", result_type: "recent").take(100)
+    end
+
+    if search.terms[4]
+      @tweets4 = @twitter.search(search.terms[2].text, result_type: "recent").take(100)  
+      10.times do
+        last_id = @tweets4.last.id - 1
+        @tweets4 = @tweets4 + @twitter.search(search.terms[1].text, max_id: last_id, result_type: "recent").take(100)
+      end
+    else
+      @tweets4 = @twitter.search("geo", result_type: "recent").take(100)
     end
 
   end
