@@ -12,17 +12,17 @@
     </div>
     
     <div x-ng-show = "showBoxes" class= "row medium-block-grid-2"  >
-      <div class="medium-8 columns search">
-        <%= form_for(@search) do |f| %>
-          <%= f.fields_for :terms do |builder| %>
-            <%= builder.text_field :text, placeholder: "add a search term", class: "searchbox" %>
-          <% end %>
-
-          <%= f.submit "SEARCH", class: "button", ng_click: "showBoxes = false" %>
-
-          <input type = "button" class = "button" id = "btnAddOne" value = "Add another term">
-          <input type = "button" class = "button" id = "removeTerm" value = "Remove the last term">
-      <% end %>
+      <div class= "row medium-block-grid-2" id = "button"  >
+        <div class="medium-8 columns search">
+          <%= form_for(@search) do |f| %>
+            <%= f.fields_for :terms do |builder| %>
+              <%= builder.text_field :text, placeholder: "Search something cool", class: "searchbox" %>
+            <% end %>
+            <%= f.submit "Search", class: "button expand [secondary success alert]" %>
+            <input type = "button" class = "button" id = "btnAddOne" value = "Add">
+            <input type = "button" class = "button" id = "removeTerm" value = "Remove">
+        <% end %>
+        </div>
       </div>
     </div>
 
