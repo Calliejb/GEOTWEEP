@@ -28,7 +28,7 @@
 
     <script type="text/javascript">
       handler = Gmaps.build('Google');
-      handler.buildMap({ provider: {zoom: 2.5, styles: [
+      handler.buildMap({ provider: {zoom: 3, styles: [
         {"featureType": "all", "stylers": [{"saturation": -100},{"gamma": 0.5}]}], provider_key: "AIzaSyDJJPOQH24cT6ETa9IZacS7NENpUt2MKzA"}, internal: {id: 'map-canvas'}}, function(){
         
         markers1 = handler.addMarkers([
@@ -46,7 +46,8 @@
                       "width":  40,
                       "height": 40
                     },
-                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> "
+                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> ",
+                    "do_clustering": false
                   },
                 <% end %>
               <% end %>
@@ -91,48 +92,6 @@
                       "height": 40
                     },
                     "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> "// info window text
-                  },
-              <% end %>
-            <% end %>
-          <% end %>
-        ]);
-        markers4 = handler.addMarkers([
-          <% if @tweets4 %>
-            <% @tweets4.each do |t| %>
-                <% hasht = t.to_h %>
-                <% if hasht[:coordinates] != nil %>
-
-                <% latitude = hasht[:coordinates][:coordinates][1] %>
-                <% longitude = hasht[:coordinates][:coordinates][0] %>
-                  { "lat": <%= latitude.to_f %>,
-                    "lng": <%= longitude.to_f %>,
-                    "picture": {
-                      "url": "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|0000FF|000000",
-                      "width":  40,
-                      "height": 40
-                    },
-                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> "// info window text (this is optional)
-                  },
-              <% end %>
-            <% end %>
-          <% end %>
-        ]);
-        markers5 = handler.addMarkers([
-          <% if @tweets5 %>
-            <% @tweets5.each do |t| %>
-                <% hasht = t.to_h %>
-                <% if hasht[:coordinates] != nil %>
-
-                <% latitude = hasht[:coordinates][:coordinates][1] %>
-                <% longitude = hasht[:coordinates][:coordinates][0] %>
-                  { "lat": <%= latitude.to_f %>,
-                    "lng": <%= longitude.to_f %>,
-                    "picture": {
-                      "url": "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|0000FF|000000",
-                      "width":  40,
-                      "height": 40
-                    },
-                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> "// info window text (this is optional)
                   },
               <% end %>
             <% end %>

@@ -1,10 +1,14 @@
 
-<<<<<<< Updated upstream
+
 <div x-ng-app="geotweepApp">
 	<div x-ng-controller="SearchesCtrl">
 
-		<%= @user.email %>
-=======
+		<% if @user.username %>
+			<%= @user.username %>
+		<% else %>
+			<%= @user.email %>
+		<% end %>
+
 <div class="row">
 	<div class="large-12 medium-12 small-12 columns text-center">
 		<h3><%= @user.email %></h3>
@@ -21,11 +25,9 @@
 				searches.
 			<% end %></h1>
 	</div>
->>>>>>> Stashed changes
 
 </div>
 
-<<<<<<< Updated upstream
 		<div class="row">
 			<div class="large-2 medium-2 small-2 columns text-left">
 				<% @user.searches.each do |search| %>

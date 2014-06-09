@@ -51,11 +51,11 @@ geoApp.controller('GeoCtrl', ['$scope', 'Search', function($scope, Search) {
 $(function(){
  // Adding a button that gets wired up after the page renders. On click it will add another search bar. 
   $("#btnAddOne").on("click", function() {
-      if ($("input.searchbox").length >= 5)
+      if ($("input.searchbox").length >= 3)
         return;
   lastsearchbox = $("input.searchbox:last");
       var lastAvail = lastsearchbox[0].outerHTML;
-      var offset = -1
+      var offset = -1;
       // The offset moves along through the string until there aren't any more instances
       while((offset = lastAvail.indexOf("terms_attributes", offset + 1)) >= 0)
       {
