@@ -26,6 +26,11 @@ html, body {
 
 .off-canvas-wrap {
 	height: 100%;
+	overflow-y: auto;
+}
+
+.move-right {
+	overflow-y: hidden;
 }
 .page-wrapper {
 	height: 100%;
@@ -38,19 +43,38 @@ html, body {
 
 .search-colored:nth-child(3n-2) {
 	h4 {
+		background: #BA3223;
+	}
+}
+
+.search-colored:nth-child(3n-1) {
+	h4 {
 		background: #2358BA;
 	}
 }
-.search-colored:nth-child(3n-1) {
+
+.search-colored:nth-child(3n-0) {
 	h4 {
-		background: #BA3223;
+		background: #23BA32;
 	}
+}
+
+/* USER PROFILE VIEW */
+
+/*.row {
+	margin: 0 auto;
+	padding: 5px;
+}*/
+
+.view-terms {
+	padding: 2px;
 }
 
 /* DEVISE VIEWS */
 
 .container {
 	margin-top: 30px;
+	margin-bottom: 30px;
 	text-align: center;
 	font-family: helvetica;
 	color: black;
