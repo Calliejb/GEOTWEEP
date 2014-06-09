@@ -35,9 +35,7 @@
 
     <script type="text/javascript">
       handler = Gmaps.build('Google');
-      handler.buildMap({ provider: {zoom: 3, styles: [
-
-        {"featureType": "all", "stylers": [{"saturation": -100},{"gamma": 0.5}]}], provider_key: "AIzaSyDJJPOQH24cT6ETa9IZacS7NENpUt2MKzA"}, markers: { clusterer_maxZoom: 2 }, internal: {id: 'map-canvas'}}, function(){
+      handler.buildMap({ provider: {zoom: 3, styles: [{"featureType": "all", "stylers": [{"saturation": -100},{"gamma": 0.5}]}], provider_key: "AIzaSyDJJPOQH24cT6ETa9IZacS7NENpUt2MKzA"}, markers: { clusterer_maxZoom: 2 }, internal: {id: 'map-canvas'}}, function(){
         
         markers1 = handler.addMarkers([
           <% if @tweets %>
