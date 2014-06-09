@@ -54,7 +54,7 @@ html, body {
 }
 .search-colored:nth-child(3) {
 	h4 {
-		background: #BA3223;
+		background: #30F233;
 	}
 }
 
@@ -72,8 +72,19 @@ html, body {
 	padding: 5px;
 }*/
 
-.view-terms {
-	padding: 2px;
+.recent-searches {
+	padding-left: 5%;
+	padding-top: 100px;
+}
+.top-searches {
+	padding-left: 5%;
+	padding-top: 100px;
+}
+
+.background {
+	background-image: url("WorldHeatMapGrey.png");
+	padding-top: 30px;
+	padding-bottom: 200px;
 }
 
 

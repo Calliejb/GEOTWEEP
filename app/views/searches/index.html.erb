@@ -34,8 +34,8 @@
 
 
     <script type="text/javascript">
-      handler = Gmaps.build('Google');
-      handler.buildMap({ provider: {zoom: 3, styles: [{"featureType": "all", "stylers": [{"saturation": -100},{"gamma": 0.5}]}], provider_key: "AIzaSyDJJPOQH24cT6ETa9IZacS7NENpUt2MKzA"}, markers: { clusterer_maxZoom: 2 }, internal: {id: 'map-canvas'}}, function(){
+      handler = Gmaps.build('Google', { markers: { clusterer: undefined  } });
+      handler.buildMap({ provider: {zoom: 2, styles: [{"featureType": "all", "stylers": [{"saturation": -100},{"gamma": 0.5}]}], provider_key: "AIzaSyDJJPOQH24cT6ETa9IZacS7NENpUt2MKzA"}, internal: {id: 'map-canvas'}}, function(){
         
         markers1 = handler.addMarkers([
           <% if @tweets %>
@@ -95,7 +95,6 @@
                       "url": "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|00FF00",
                       "width":  40,
                       "height": 40,
-                      "do_clustering": false
                     },
                     "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> "
                   },
@@ -103,6 +102,7 @@
             <% end %>
           <% end %>
         ]);
+        handler.map.centerOn([34, -100]);
       });
     </script>
 

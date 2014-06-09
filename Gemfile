@@ -61,5 +61,4 @@ gem 'devise'
 
 gem 'rails_12factor'
 
-gem "figaro"
 

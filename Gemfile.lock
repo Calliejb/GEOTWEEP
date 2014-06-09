@@ -75,9 +75,6 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
-    figaro (0.7.0)
-      bundler (~> 1.0)
-      rails (>= 3, < 5)
     foundation-rails (5.2.2.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
@@ -200,7 +197,6 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   factory_girl_rails
-  figaro
   foundation-rails
   gmaps4rails
   jquery-rails

@@ -104,7 +104,7 @@ private
       @tweets3 = @twitter.search(search.terms[2].text, result_type: "recent").take(100)  
       10.times do
         last_id = @tweets3.last.id - 1
-        @tweets3 = @tweets3 + @twitter.search(search.terms[1].text, max_id: last_id, result_type: "recent").take(100)
+        @tweets3 = @tweets3 + @twitter.search(search.terms[2].text, max_id: last_id, result_type: "recent").take(100)
       end
     else
       @tweets3 = nil
