@@ -1,90 +1,50 @@
-
-
 <div x-ng-app="geotweepApp">
 	<div x-ng-controller="SearchesCtrl">
 
-		<% if @user.username %>
-			<%= @user.username %>
-		<% else %>
-			<%= @user.email %>
-		<% end %>
+		<div class="container">
+			<h2 class="title"><%= @user.email %></h2>
+			<h5>Joined on <%= @user.created_at.to_formatted_s(:long) %>.</h5>
+			<br>
+			<h2>Search History</h2>
+			<h5>You have <%= @user.searches.count %> 
+					<% if @user.searches.count == 1 %>
+						search!
+					<% else %>
+						searches!
+					<% end %></h5>
+					<br>
 
-<div class="row">
-	<div class="large-12 medium-12 small-12 columns text-center">
-		<h3><%= @user.email %></h3>
-		<h5>Joined on <%= @user.created_at.to_formatted_s(:long) %>.</h5>
-	</div>
-</div>
-
-<div class="row">
-	<div class="large-12 medium-12 small-12 columns text-center">		
-		<h1>You have <%= @user.searches.count %>
-			<% if @user.searches.count == 1 %>
-				search.
-			<% else %>
-				searches.
-			<% end %></h1>
-	</div>
-
-</div>
-
-		<div class="row">
-			<div class="large-2 medium-2 small-2 columns text-left">
 				<% @user.searches.each do |search| %>
-					<%= search.created_at.to_formatted_s(:long) %> 
-			</div>
-			<div class="large-8 medium-8 small-8 columns text-left "> 
-				<% @terms = Term.where(:search_id => search.id) %>				
-					<% @terms.each do |term| %>
-						<%= term.text %>
-					<% end %>
+					<h6><%= search.created_at.to_formatted_s(:long) %></h6>
+					<% @terms = Term.where(:search_id => search.id) %>
+						<% @terms.each do |term| %>
+							<div class="view-terms">
+								<%= term.text %>
+							</div>
+						<% end %>
+					<br>
 				<% end %>
-				<br />
-			</div>
+			
+			<h2>Top Searches</h2>
 
+				<% @term_count.first(10).each do |term| %>
+					<div class="view-terms">
+						<%= term[0] %>
+						<%= term[1] %>
+					</div>
+				<% end %> <br>
+
+
+			<h2>Recent Searches</h2>
+
+				<div x-ng-repeat = "search in searches|limitTo:10">
+					<div x-ng-repeat = "term in search.terms">
+							<div class="view-terms">
+								{{term.text}}
+							</div>
+					</div>
+				</div>
 		</div>
 
-	<h2>Top Searches</h2>
-
-		<% @term_count.first(10).each do |term| %>
-			<%= term[0] %>
-			<%= term[1] %> <br>
-		<% end %> <br>
-
-
-		<h2>Recent Searches</h2>
-
-		<div x-ng-repeat = "search in searches|limitTo:10">
-			<div x-ng-repeat = "term in search.terms">
-					{{term.text}}
-			</div>
-		</div>
-
-
-
-		<h3>You have <%= @user.searches.count %> 
-			<% if @user.searches.count == 1 %>
-				search!
-			<% else %>
-				searches!
-			<% end %></h3>
-
 	</div>
-=======
-<div class="row">
-	<div class="large-2 medium-2 small-2 columns text-left">
-		<% @user.searches.each do |search| %>
-		<img src="http://i.imgur.com/6Gp6HoW.png" />
-		<%= search.created_at.to_formatted_s(:long) %>		
-	</div>
-	<div class="large-8 medium-8 small-8 columns text-left ">		
-				<% @terms = Term.where(:search_id => search.id) %>
-				<% @terms.each do |term| %>
-				
-				<%= term.text %>
-				<% end %>
-				<% end %>
-
-</div>
->>>>>>> Stashed changes
 </div>

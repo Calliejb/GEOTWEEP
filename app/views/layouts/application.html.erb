@@ -35,7 +35,7 @@
                 <% if user_signed_in? %>
                 <a href="#"><%= current_user.email %></a>
                 <ul class="dropdown">
-                  <li><a href="#"><%= link_to "View Profile", user_path(current_user) %></a></li>
+                  <li><a href="#"><%= link_to "View Search History", user_path(current_user) %></a></li>
                   <li><a href="#"><%= link_to "Edit Profile", edit_user_registration_path %></a></li>
                   <li><a href="#"><%= link_to "Logout", destroy_user_session_path, method: :delete %></a></li>
                 </ul>

@@ -17,7 +17,7 @@
           <%= f.fields_for :terms do |builder| %>
             <%= builder.text_field :text, placeholder: "add a search term", class: "searchbox" %>
           <% end %>
-          <%= f.submit "SEARCH", class: "button" %>
+          <%= f.submit "Search", class: "button" %>
           <input type = "button" class = "button" id = "btnAddOne" value = "Add another term">
           <input type = "button" class = "button" id = "removeTerm" value = "Remove the last term">
       <% end %>
@@ -42,7 +42,7 @@
                   { "lat": <%= latitude.to_f %>,
                     "lng": <%= longitude.to_f %>,
                     "picture": {
-                      "url": "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|FF0000|000000",
+                      "url": "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|FF0000",
                       "width":  40,
                       "height": 40
                     },
@@ -65,7 +65,7 @@
                   { "lat": <%= latitude.to_f %>,
                     "lng": <%= longitude.to_f %>,
                     "picture": {
-                      "url": "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|0000FF|000000",
+                      "url": "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|0000FF",
                       "width":  40,
                       "height": 40
                     },
@@ -87,7 +87,7 @@
                   { "lat": <%= latitude.to_f %>,
                     "lng": <%= longitude.to_f %>,
                     "picture": {
-                      "url": "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|0000FF|000000",
+                      "url": "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|00FF00",
                       "width":  40,
                       "height": 40
                     },
