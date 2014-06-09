@@ -34,7 +34,7 @@
     <script type="text/javascript">
       handler = Gmaps.build('Google');
       handler.buildMap({ provider: {zoom: 3, styles: [
-        {"featureType": "all", "stylers": [{"saturation": -100},{"gamma": 0.5}]}], provider_key: "AIzaSyDJJPOQH24cT6ETa9IZacS7NENpUt2MKzA"}, internal: {id: 'map-canvas'}}, function(){
+        {"featureType": "all", "stylers": [{"saturation": -100},{"gamma": 0.5}]}], provider_key: "AIzaSyDJJPOQH24cT6ETa9IZacS7NENpUt2MKzA"}, markers: { clusterer_maxZoom: 2 }, internal: {id: 'map-canvas'}}, function(){
         
         markers1 = handler.addMarkers([
           <% if @tweets %>
@@ -49,11 +49,9 @@
                     "picture": {
                       "url": "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|FF0000|000000",
                       "width":  40,
-                      "height": 40
+                      "height": 40,
                     },
-                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> ",
-                    "do_clustering": false,
-                    "clusterer_grid_size": 500
+                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> "
                   },
                 <% end %>
               <% end %>
@@ -75,9 +73,7 @@
                       "width":  40,
                       "height": 40
                     },
-                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> ",
-                    "do_clustering": false,
-                    "clusterer_grid_size": 500
+                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> "
                   },
               <% end %>
             <% end %>
@@ -97,11 +93,10 @@
                     "picture": {
                       "url": "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|0000FF|000000",
                       "width":  40,
-                      "height": 40
+                      "height": 40,
+                      "do_clustering": false
                     },
-                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> ",
-                    "do_clustering": false,
-                    "clusterer_grid_size": 500
+                    "infowindow": "<%= hasht[:text].to_s.gsub("\n","") %> "
                   },
               <% end %>
             <% end %>
