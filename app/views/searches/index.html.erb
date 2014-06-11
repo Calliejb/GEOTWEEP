@@ -11,6 +11,7 @@
       <div id="map-canvas"></div>
     </div>
     
+    <!--    Renders our search form -->
     <div x-ng-show = "showBoxes" class= "row medium-block-grid-2"  >
       <div class= "row medium-block-grid-2" id = "button"  >
         <div class="medium-8 columns search">
@@ -26,6 +27,7 @@
       </div>
     </div>
 
+    <!--    Renders our new search button using angular -->
     <div class = "new-search">
       <div x-ng-hide = "showBoxes" class = "medium-6 columns">
         <a x-ng-click= "showBoxes = true" class = "custom-button-class">New Search </a>

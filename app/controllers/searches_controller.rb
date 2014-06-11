@@ -10,12 +10,13 @@ class SearchesController < ApplicationController
     @search = Search.new
     @search.terms.build
 
+    # Passes in search term to our get_tweets method
     if params[:search_id]
       @s = Search.find(params[:search_id])
       get_tweets(@s)
     end
 
-
+    # Saves searches json -- terms and timestamps
     @searches = Search.all
     respond_to do |format|
       format.html
@@ -34,11 +35,12 @@ class SearchesController < ApplicationController
     @search = Search.new(search_params)
     @search.user = current_user
 
+    # Saves terms and tweets that are collected for each search term
     if @search.save
       respond_to do |format|
         format.html {redirect_to searches_path(search_id: @search.id)}
         format.json do 
-          render json: { terms: @search.terms.map(&:text), tweets1: @tweets, tweets2: @tweets2 }, status: :created
+          render json: { terms: @search.terms.map(&:text), tweets1: @tweets, tweets2: @tweets2, tweets3: @tweets3 }, status: :created
         end
       end
     else
@@ -64,6 +66,7 @@ class SearchesController < ApplicationController
 
 private
 
+  # Initializes the Twitter request with authorization keys
   def twitter_init
 
     @twitter = Twitter::REST::Client.new do |config|
@@ -78,6 +81,7 @@ private
     params.require(:search).permit(:terms_attributes => [:text])
   end
 
+  # Searches 600 tweets based on search term
   def get_tweets(search)
 
     if search.terms[0]
